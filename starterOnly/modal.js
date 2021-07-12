@@ -51,6 +51,7 @@ function checkFormIsInvalid() {
   fetch('assets/formValidators.json').then((rep) => rep.json()).then((validators) => {
     for (let i = 0; i < inputs.length; i++) {
       let attr = inputs[i].name
+      console.log(inputs[i].value)
       //we need to check if cgu is checked so we test a wrong regex which always return false to trigger the checked verification
       if (inputs[i].value.match(validators[attr].regex) || inputs[i].checked) {
         console.log(attr)
