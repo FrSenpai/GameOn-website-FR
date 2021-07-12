@@ -72,6 +72,8 @@ img {
   color: red;
   display: block;
   font-size: 11px;
+  text-align: center;
+  margin-bottom: 5px;
 }
 
 @media screen and (max-width: 768px) {
@@ -176,7 +178,7 @@ main {
 }
 
 .content {
-  margin: 5% auto;
+  margin:auto;
   width: 100%;
   max-width: 500px;
   animation-name: modalopen;
