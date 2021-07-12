@@ -32,13 +32,19 @@ function validate() {
   //we reset old errors
   removeErrors()
 
-  const invalid = checkFormIsInvalid()
-  console.log(invalid)
-  if (!invalid) {
+  checkFormIsInvalid().then((invalid) => {
+    console.log(invalid)
+    if (!invalid) {
+      const form = document.getElementsByName('reserve')[0]
+      form.style.display = 'none'
+      const popup = document.getElementsByClassName('modal-body')[0]
+      const confirmMsg = document.createElement('p')
+      confirmMsg.setAttribute('class', 'confirm')
+      confirmMsg.innerHTML = "Votre réservation à bien été prise en compte."
+      popup.appendChild(confirmMsg)
+    }
+  })
 
-  } else {
-
-  }
 }
 
 /**
@@ -48,7 +54,7 @@ function validate() {
 function checkFormIsInvalid() {
   let error = false;
   const inputs = document.getElementsByClassName('checkedControl')
-  fetch('assets/formValidators.json').then((rep) => rep.json()).then((validators) => {
+   return fetch('assets/formValidators.json').then((rep) => rep.json()).then((validators) => {
     for (let i = 0; i < inputs.length; i++) {
       let attr = inputs[i].name
       console.log(inputs[i].value)
@@ -69,7 +75,11 @@ function checkFormIsInvalid() {
       radioDOM[0].parentNode.appendChild(span)
       error = true
     }
+
+    return error
   })
+
+  
 }
 
 function createDomError(name, error) {
