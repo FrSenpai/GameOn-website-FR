@@ -1,5 +1,5 @@
 function editNav() {
-  var x = document.getElementById("myTopnav");
+  let x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
     x.className += " responsive";
   } else {
@@ -33,7 +33,6 @@ function validate() {
   removeErrors()
 
   checkFormIsInvalid().then((invalid) => {
-    console.log(invalid)
     if (!invalid) {
       const form = document.getElementsByName('reserve')[0]
       form.style.display = 'none'
@@ -56,12 +55,10 @@ function checkFormIsInvalid() {
   const inputs = document.getElementsByClassName('checkedControl')
    return fetch('assets/formValidators.json').then((rep) => rep.json()).then((validators) => {
     for (let i = 0; i < inputs.length; i++) {
-      let attr = inputs[i].name
-      console.log(inputs[i].value)
+      const attr = inputs[i].name
       //we need to check if cgu is checked so we test a wrong regex which always return false to trigger the checked verification
-      if (inputs[i].value.match(validators[attr].regex) || inputs[i].checked) {
-        console.log(attr)
-      } else {
+      
+      if (!(inputs[i].value.match(validators[attr].regex) || inputs[i].checked)) {
         createDomError(attr, validators[attr].error)
         error = true
       }
@@ -83,11 +80,10 @@ function checkFormIsInvalid() {
 }
 
 function createDomError(name, error) {
-  console.log(name)
   let dom = null;
   if (name === 'cgu') dom = document.getElementById('checkbox1')
   else dom = document.getElementById(name)
-  const span = document.createElement("span")
+  let span = document.createElement("span")
   span.setAttribute('class', 'error')
   span.innerHTML = error
   dom.parentNode.appendChild(span)
