@@ -34,13 +34,7 @@ function validate() {
 
   checkFormIsInvalid().then((invalid) => {
     if (!invalid) {
-      const form = document.getElementsByName('reserve')[0]
-      form.style.display = 'none'
-      const popup = document.getElementsByClassName('modal-body')[0]
-      const confirmMsg = document.createElement('p')
-      confirmMsg.setAttribute('class', 'confirm')
-      confirmMsg.innerHTML = "Votre réservation à bien été prise en compte."
-      popup.appendChild(confirmMsg)
+      createSuccessDialog()
     }
   })
 }
@@ -58,6 +52,8 @@ function checkFormIsInvalid() {
       //we need to check if cgu is checked so we test a wrong regex which always return false to trigger the checked verification
       
       if (!(inputs[i].value.match(validators[attr].regex) || inputs[i].checked)) {
+        if (attr !== 'cgu') inputs[i].setAttribute('class', 'text-control checkedControl inpError')
+        
         createDomError(attr, validators[attr].error)
         error = true
       }
@@ -103,9 +99,37 @@ function checkRadioIsValid() {
 
 function removeErrors() {
   const errors = document.getElementsByClassName('error')
-  if (errors.length > 0) {
-    for (let i = 0; i < errors.length; i++) {
-      while (errors[i].firstChild) errors[i].removeChild(errors[i].firstChild);
+  let inpError = document.getElementsByClassName('inpError')
+  //we reset classname of inputs
+  if (inpError.length > 0) {
+    for (let i = 0; i < inpError.length; i++) {
+      inpError[i].setAttribute('class','text-control checkedControl')
     }
   }
+  // we remove errors span
+  if (errors.length > 0) {
+    for (let i = 0; i < errors.length; i++) {
+      while (errors[i].firstChild) {
+        errors[i].removeChild(errors[i].firstChild);
+        
+      } 
+    }
+  }
+}
+
+function createSuccessDialog() {
+  const form = document.getElementsByName('reserve')[0]
+  form.style.display = 'none'
+  const popup = document.getElementsByClassName('modal-body')[0]
+  //creation of success msg
+  const divConfirmMsg = document.createElement('div')
+  const confirmMsg = document.createElement('p')
+  divConfirmMsg.appendChild(confirmMsg)
+  confirmMsg.setAttribute('class', 'confirm')
+  divConfirmMsg.setAttribute('class', 'ctnSuccess')
+  confirmMsg.innerHTML = "Votre réservation à bien été prise en compte."
+
+  //adapt modal body
+  let modal = document.getElementsByClassName('modal-body').item(0).setAttribute('class', 'modal-body successModal')
+  popup.appendChild(divConfirmMsg)
 }

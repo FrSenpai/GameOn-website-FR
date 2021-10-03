@@ -72,8 +72,12 @@ img {
   color: red;
   display: block;
   font-size: 11px;
-  text-align: center;
+  text-align: left;
   margin-bottom: 5px;
+}
+
+.inpError {
+  outline: 2px solid red;
 }
 
 @media screen and (max-width: 768px) {
@@ -193,11 +197,31 @@ main {
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
+
 }
+
+.successModal{
+  min-height: 536px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .confirm {
-  color: green;
+  width: 80%;
+  margin: auto;
+  color: #FFFFFF;
   text-align: center;
-  font-size: 16px;
+  font-size: 36px;
+  font-weight: normal;
+  font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+}
+
+.ctnSuccess {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 label {
   font-family: var(--font-default);
