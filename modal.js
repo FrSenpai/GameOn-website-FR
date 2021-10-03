@@ -43,7 +43,6 @@ function validate() {
       popup.appendChild(confirmMsg)
     }
   })
-
 }
 
 /**
