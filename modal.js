@@ -2,9 +2,12 @@ function editNav() {
   let x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
     x.className += " responsive";
+    document.getElementsByClassName('main-navbar')[0].setAttribute('class', 'main-navbar show')
   } else {
     x.className = "topnav";
+    document.getElementsByClassName('main-navbar')[0].setAttribute('class', 'main-navbar')
   }
+  
 }
 
 // DOM Elements
