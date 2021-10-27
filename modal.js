@@ -75,7 +75,11 @@ function checkFormIsInvalid() {
 
 
 }
-
+/**
+ * 
+ * @param {string} name name of the attribut checked
+ * @param {string} error error value of the attribut
+ */
 function createDomError(name, error) {
   let dom = null;
   if (name === 'cgu') dom = document.getElementById('checkbox1')
@@ -98,7 +102,9 @@ function checkRadioIsValid() {
   })
   return countChecked > 0
 }
-
+/**
+ * @description we remove existing errors
+ */
 function removeErrors() {
   const errors = document.getElementsByClassName('error')
   let inpError = document.getElementsByClassName('inpError')
@@ -118,7 +124,9 @@ function removeErrors() {
     }
   }
 }
-
+/**
+ * @description we create success dialog here
+ */
 function createSuccessDialog() {
   const form = document.getElementsByName('reserve')[0]
   form.style.display = 'none'
@@ -126,6 +134,7 @@ function createSuccessDialog() {
   //creation of success msg
   const divConfirmMsg = document.createElement('div')
   const confirmMsg = document.createElement('p')
+  //creation of new closing btn
   const btnClose = document.createElement('button')
   btnClose.textContent = "Fermer"
   btnClose.setAttribute('class', "btn-submit closePopup")
