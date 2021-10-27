@@ -188,6 +188,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .confirm {
@@ -237,6 +238,10 @@ input {
   line-height: 0.3;
   opacity: 0;
   transition: 0.3s;
+}
+.closePopup {
+  position: absolute;
+    bottom: 17px;
 }
 .formData[data-error-visible="true"]::after {
   opacity: 1;

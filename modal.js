@@ -7,7 +7,6 @@ function editNav() {
     x.className = "topnav";
     document.getElementsByClassName('main-navbar')[0].setAttribute('class', 'main-navbar')
   }
-  
 }
 
 // DOM Elements
@@ -49,14 +48,14 @@ function validate() {
 function checkFormIsInvalid() {
   let error = false;
   const inputs = document.getElementsByClassName('checkedControl')
-   return fetch('assets/formValidators.json').then((rep) => rep.json()).then((validators) => {
+  return fetch('assets/formValidators.json').then((rep) => rep.json()).then((validators) => {
     for (let i = 0; i < inputs.length; i++) {
       const attr = inputs[i].name
       //we need to check if cgu is checked so we test a wrong regex which always return false to trigger the checked verification
-      
+
       if (!(inputs[i].value.match(validators[attr].regex) || inputs[i].checked)) {
         if (attr !== 'cgu') inputs[i].setAttribute('class', 'text-control checkedControl inpError')
-        
+
         createDomError(attr, validators[attr].error)
         error = true
       }
@@ -74,7 +73,7 @@ function checkFormIsInvalid() {
     return error
   })
 
-  
+
 }
 
 function createDomError(name, error) {
@@ -106,7 +105,7 @@ function removeErrors() {
   //we reset classname of inputs
   if (inpError.length > 0) {
     for (let i = 0; i < inpError.length; i++) {
-      inpError[i].setAttribute('class','text-control checkedControl')
+      inpError[i].setAttribute('class', 'text-control checkedControl')
     }
   }
   // we remove errors span
@@ -114,8 +113,8 @@ function removeErrors() {
     for (let i = 0; i < errors.length; i++) {
       while (errors[i].firstChild) {
         errors[i].removeChild(errors[i].firstChild);
-        
-      } 
+
+      }
     }
   }
 }
@@ -127,6 +126,9 @@ function createSuccessDialog() {
   //creation of success msg
   const divConfirmMsg = document.createElement('div')
   const confirmMsg = document.createElement('p')
+  const btnClose = document.createElement('button')
+  btnClose.textContent = "Fermer"
+  btnClose.setAttribute('class', "btn-submit closePopup")
   divConfirmMsg.appendChild(confirmMsg)
   confirmMsg.setAttribute('class', 'confirm')
   divConfirmMsg.setAttribute('class', 'ctnSuccess')
@@ -135,4 +137,8 @@ function createSuccessDialog() {
   //adapt modal body
   let modal = document.getElementsByClassName('modal-body').item(0).setAttribute('class', 'modal-body successModal')
   popup.appendChild(divConfirmMsg)
+  popup.appendChild(btnClose)
+  //Trigger new closing btn
+  let triggerClose = document.getElementsByClassName('closePopup')
+  triggerClose[0].addEventListener('click', () => closeModal())
 }
