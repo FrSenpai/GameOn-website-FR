@@ -13,7 +13,7 @@
     },
     "birthdate": {
         "regex" : "^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$",
-        "error" : "Vous devez entrer votre date de naissance."
+        "error" : "Vous devez entrer votre date de naissance ou être âgé de plus de 3 ans."
     },
     "quantity": {
         "regex" : "^([0-9][0-9]?)$",

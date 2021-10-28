@@ -51,11 +51,20 @@ function checkFormIsInvalid() {
   return fetch('assets/formValidators.json').then((rep) => rep.json()).then((validators) => {
     for (let i = 0; i < inputs.length; i++) {
       const attr = inputs[i].name
+      if (attr === "birthdate") {
+        let birth = new Date(inputs[i].value)
+        //we need to block younger people (before 3 years old)
+        if ( birth > 0 && !(birth.setFullYear(birth.getFullYear() + 3) >= Date.now())) continue 
+        else {
+          inputs[i].setAttribute('class', 'text-control checkedControl inpError')
+          createDomError(attr, validators[attr].error)
+          continue
+        }
+      }
       //we need to check if cgu is checked so we test a wrong regex which always return false to trigger the checked verification
-
       if (!(inputs[i].value.match(validators[attr].regex) || inputs[i].checked)) {
         if (attr !== 'cgu') inputs[i].setAttribute('class', 'text-control checkedControl inpError')
-
+        
         createDomError(attr, validators[attr].error)
         error = true
       }
