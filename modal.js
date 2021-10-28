@@ -19,10 +19,21 @@ closeBtn.forEach((btn) => btn.addEventListener('click', () => closeModal()))
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
+let alreadyErrors = false
 // launch modal form
 function launchModal() {
   modalbg.style.display = "flex";
+  const triggerInput = document.getElementsByClassName('checkedControl')
+  for (let i = 0; i < triggerInput.length; i++) {
+      triggerInput[i].addEventListener('change', () => {
+        //avoid multi fire when autocompletion
+        if (!alreadyErrors) {
+          alreadyErrors = true 
+          removeErrors()
+          checkFormIsInvalid().then((inv) => { alreadyErrors = false})
+        }
+      })
+  }
 }
 
 //close modal form
@@ -33,7 +44,6 @@ function closeModal() {
 function validate() {
   //we reset old errors
   removeErrors()
-
   checkFormIsInvalid().then((invalid) => {
     if (!invalid) {
       createSuccessDialog()
@@ -54,8 +64,10 @@ function checkFormIsInvalid() {
       if (attr === "birthdate") {
         let birth = new Date(inputs[i].value)
         //we need to block younger people (before 3 years old)
-        if ( birth > 0 && !(birth.setFullYear(birth.getFullYear() + 3) >= Date.now())) continue 
-        else {
+        if (birth > 0 && !(birth.setFullYear(birth.getFullYear() + 3) >= Date.now())) {
+          inputs[i].setAttribute('class', 'text-control checkedControl')
+          continue
+        } else {
           inputs[i].setAttribute('class', 'text-control checkedControl inpError')
           createDomError(attr, validators[attr].error)
           continue
@@ -64,7 +76,6 @@ function checkFormIsInvalid() {
       //we need to check if cgu is checked so we test a wrong regex which always return false to trigger the checked verification
       if (!(inputs[i].value.match(validators[attr].regex) || inputs[i].checked)) {
         if (attr !== 'cgu') inputs[i].setAttribute('class', 'text-control checkedControl inpError')
-        
         createDomError(attr, validators[attr].error)
         error = true
       }
