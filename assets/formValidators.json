@@ -1,0 +1,29 @@
+{
+    "first": {
+        "regex" : "^[A-Za-z]{2}",
+        "error": "Veuillez entrer 2 caractères ou plus pour le champ du prénom."
+    },
+    "last" : {
+        "regex" : "^[A-Za-z]{2}",
+        "error": "Veuillez entrer 2 caractères ou plus pour le champ du nom."
+    },
+    "email": {
+        "regex" : "^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$",
+            "error": "Veuillez entrer une adresse mail valide."
+    },
+    "birthdate": {
+        "regex" : "^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$",
+        "error" : "Vous devez entrer votre date de naissance ou être âgé de plus de 3 ans."
+    },
+    "quantity": {
+        "regex" : "^([0-9][0-9]?)$",
+        "error": "Veuillez renseigner votre nombre de tournois."
+    },
+    "location": {
+        "error": "Veuillez choisir une option."
+    },
+    "cgu": {
+        "regex" : "^[A-Za-z]{3}" ,
+        "error": "Veuillez accepter les CGU."
+    }
+}
